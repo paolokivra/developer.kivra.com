@@ -221,7 +221,7 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="shell">cURL</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -293,68 +293,44 @@
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-          <h1 id="errors">Errors</h1>
+          <h1 id="payment-service">Payment service</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&lsquo;s frontmatter. Files are included in the order listed.</aside>
+<h2 id="post-payment">Post payment</h2>
+<pre class="highlight shell tab-shell"><code>curl -i -X POST
+     -H <span class="s2">"Authorization: token </span><span class="k">${</span><span class="nv">API_TOKEN</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-type: application/json"</span> <span class="se">\</span>
+     -d <span class="k">${</span><span class="nv">JSON_PAYLOAD</span><span class="k">}</span> <span class="se">\</span>
+     https://api.kivra.com/v1/tenant/<span class="k">${</span><span class="nv">TENANT_KEY</span><span class="k">}</span>/content
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"todo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"todo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoints tries to pay a content</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<h3 id="http-request">HTTP Request</h3>
 
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
+<p><code class="prettyprint">PUT http://api.kivra.com/v2/user/${USER_KEY}/content/${CONTENT_KEY}/pay</code></p>
 
+<h2 id="json-payload-metadata">JSON-payload (Metadata)</h2>
+
+<h3 id="example-metadata">Example metadata</h3>
+
+<blockquote>
+<p>Example JSON to pay a content</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">"action"</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="s2">"se.oneclick"</span><span class="w">
+    </span><span class="p">,</span><span class="w"> </span><span class="s2">"account"</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="s2">"${MANDATE_KEY}"</span><span class="w">
+    </span><span class="p">,</span><span class="w"> </span><span class="s2">"amount"</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="shell">cURL</a>
           </div>
       </div>
     </div>

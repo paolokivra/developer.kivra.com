@@ -289,10 +289,6 @@
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
           <h1 id="payment-service">Payment service</h1>
 
 <h2 id="post-payment">Post payment</h2>
@@ -326,6 +322,65 @@ Remember — a happy kitten is an authenticated kitten!
     </span><span class="p">,</span><span class="w"> </span><span class="s2">"account"</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="s2">"${MANDATE_KEY}"</span><span class="w">
     </span><span class="p">,</span><span class="w"> </span><span class="s2">"amount"</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="w">
     </span><span class="p">}</span><span class="w">
+</span></code></pre>
+          <h1 id="tenant">Tenant</h1>
+
+<h2 id="create-new-tenant">Create new tenant</h2>
+<pre class="highlight shell tab-shell"><code>curl -i -X POST <span class="se">\</span>
+     -H <span class="s2">"Authorization: token </span><span class="k">${</span><span class="nv">API_TOKEN</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-type: application/json"</span> <span class="se">\</span>
+     -d <span class="k">${</span><span class="nv">JSON_PAYLOAD</span><span class="k">}</span> <span class="se">\</span>
+     https://api.kivra.com/v1/tenant/
+
+HTTP/1.1 201 Created
+server: Cowboy
+date: Mon, 26 Mar 2018 09:50:09 GMT
+content-length: 254
+content-type: application/json
+kivra-objkey: 1522057810adc62537a9cc41a0afefddb2481ed821
+location: http://localhost:8000/v1/tenant/1522057810adc62537a9cc41a0afefddb2481ed821
+
+<span class="o">{</span>
+  <span class="s2">"edit_security_level"</span>: 25,
+  <span class="s2">"groups"</span>: <span class="o">[]</span>,
+  <span class="s2">"status"</span>: <span class="s2">"optional"</span>,
+  <span class="s2">"visibility"</span>: <span class="s2">"visible"</span>,
+  <span class="s2">"class"</span>: <span class="s2">"opt_out"</span>,
+  <span class="s2">"payment_information"</span>: <span class="o">[]</span>,
+  <span class="s2">"phone_numbers"</span>: <span class="o">[]</span>,
+  <span class="s2">"adresses"</span>: <span class="o">[]</span>,
+  <span class="s2">"urls"</span>: <span class="o">[]</span>,
+  <span class="s2">"emails"</span>: <span class="o">[]</span>,
+  <span class="s2">"name"</span>: <span class="s2">"Kivra"</span>,
+  <span class="s2">"company_id"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"name"</span>: <span class="s2">"Kivra AB"</span>,
+      <span class="s2">"orgnr"</span>: <span class="s2">"SE556840226601"</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+
+</code></pre>
+<p>This endpoints creates new tenants.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://api.kivra.com/v1/tenant</code></p>
+
+<h3 id="request-payload">Request payload</h3>
+
+<blockquote>
+<p>Example of a tenant creation request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kivra AB"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"orgnr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SE556840226601"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kivra"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
       </div>
       <div class="dark-box">
